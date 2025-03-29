@@ -1,0 +1,17 @@
+{
+    "source_grafana_url": "",
+    "source_api_key": "",
+    "target_grafana_url": "",
+    "target_api_key": "",
+    "export_dir": "exported_dashboards",
+    
+    "folder_mapping": {
+        "": "",
+        "": ""
+    },
+
+    "dlid_mapping": {
+        "": "",
+        "": ""
+    }
+}
