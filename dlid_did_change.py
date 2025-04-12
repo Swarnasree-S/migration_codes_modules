@@ -16,11 +16,11 @@ if not dlid_map:
     print("\nWarning: No DLID mappings found in config.json")
     logging.warning("No DLID mappings found in config.json")
 
-# Load HT Meter DID Mapping
-htmeter_did_map = config_loader.config.get("htmeter_did_mapping", {})
-if not htmeter_did_map:
-    print("\nWarning: No HT meter DID mappings found in config.json")
-    logging.warning("No HT meter DID mappings found in config.json")
+# Load DID Mapping (HT Meters, Inverters, etc.)
+did_map = config_loader.config.get("did_mapping", {})
+if not did_map:
+    print("\nWarning: No DID mappings found in config.json")
+    logging.warning("No DID mappings found in config.json")
 
 def replace_dlid_and_did(json_data):
     try:
@@ -32,12 +32,13 @@ def replace_dlid_and_did(json_data):
                         if old_dlid in value:
                             json_data[key] = value.replace(old_dlid, new_dlid)
                             logging.info(f"Replaced DLID {old_dlid} → {new_dlid} in key: {key}")
-                    # Replace DIDs
-                    for dlid, did_info in htmeter_did_map.items():
-                        for did_key, new_did in did_info.items():
-                            if did_key in value:
-                                json_data[key] = value.replace(did_key, new_did)
-                                logging.info(f"Replaced DID {did_key} → {new_did} in key: {key}")
+                    
+                    # Replace DIDs (HT meters, Inverters, etc.)
+                    for dlid, did_info in did_map.items():
+                        for old_did, new_did in did_info.items():
+                            if old_did in value:
+                                json_data[key] = value.replace(old_did, new_did)
+                                logging.info(f"Replaced DID {old_did} → {new_did} in key: {key}")
                 else:
                     replace_dlid_and_did(value)
         elif isinstance(json_data, list):
