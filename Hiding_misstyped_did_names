@@ -1,0 +1,3 @@
+for all devices -->  SHOW TAG VALUES FROM "wattmon_std_mv" WITH KEY IN (did) WHERE "dlid" =~ /$dlid/
+to hide devides -->  SHOW TAG VALUES FROM "wattmon_std_mv" WITH KEY IN (did) WHERE "dlid" =~ /$dlid/ AND "did" != 'inverter2' AND "did" != 'DGmeter'
+/.*hiding mis typed inverter2 and DGmeter names in explorer view
